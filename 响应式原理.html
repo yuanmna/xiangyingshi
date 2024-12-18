@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">hello</div>
+    <script>
+        const data = {msg : 'hello'}
+
+        const p = new Proxy(data,{
+            get(target,key){
+                return target[key]
+            },
+            set(target,key,value){
+                target[key]=value
+                // 更新dom
+                document.querySelector('#app').innerHTML = value
+                return ture
+            },
+           
+        })
+        setTimeout(() => {
+           p.msg='word' 
+        }, 1000);
+        p
+    </script>
+</body>
+</html>
